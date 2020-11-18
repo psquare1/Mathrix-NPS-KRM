@@ -1,0 +1,28 @@
+#Code that determines how many people are infected overall till a certain day
+
+#Columns of Covid are 'Time of Infection', 'Time of reporting', 'x location', 'y location',
+#       'Age', 'Diabetes', 'Respiratory Illnesses', 'Abnormal Blood Pressure',
+#       'Outcome'
+
+#Columns of pop are 'x location', 'y location', 'Population'
+
+import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+
+df = pd.read_csv("COVID_Dataset.csv")
+pop = pd.read_csv("Population.csv")
+
+
+pop_den = [[0 for i in range(20)] for j in range(20)]
+for y in range(20):
+    for x in range(20):
+        pop_den[y][x] = pop['Population'][20*x+y]
+
+
+
+im = plt.imshow(pop_den, cmap = "magma", interpolation = "bilinear")
+plt.colorbar(im)
+plt.title("Population Density")
+plt.show()
